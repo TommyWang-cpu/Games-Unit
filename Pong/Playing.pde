@@ -1,6 +1,8 @@
 void game(){
- //paddles
- circle(lx,ly,ld); 
+  
+ fill(#FADD4C);
+ circle(lx,ly,ld);
+ fill(#DC4CFA);
  circle(rx,ry,rd); 
  
  //ball

@@ -43,20 +43,27 @@ void setup(){
 
 void draw(){
   background(180);
+   
+   if (gameState == playing) {
+      gameBackground();
+      game();
+      gameOver();
+    
+  }
   
   if (gameState == menu) {
-   // drawMenu();
-    //return;
+      drawMenu();
+      return;
   }
 
   if (gameState == gameOver) {
-    //drawGameOver();
-    //return;
+    drawGameOver();
+    return;
   }
 
   if (gameState == paused) {
-    //drawPauseScreen();
-    //return;
+    drawPauseScreen();
+    return;
   }
   
   if (gameState == options){
@@ -67,4 +74,5 @@ void draw(){
   gameBackground();
   game();
   gameOver();
+  drawPauseButton();
 }
