@@ -1,5 +1,4 @@
 void drawPauseScreen() {
-  //background(100);
   fill(100);
   textSize(30);
   text("PAUSED", width/2 - 50, height/2 - 20);

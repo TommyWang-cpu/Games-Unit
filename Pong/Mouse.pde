@@ -12,10 +12,14 @@ void mousePressed(){
 }
   if (gameState == menu) {
     if (mouseX > 430 && mouseX < 730 &&
-        mouseY > 425 && mouseY < 525) {
-        
+        mouseY > 425 && mouseY < 525) {        
       gameState = playing;
 }
+    if (mouseX > 80 && mouseX < 380 &&
+        mouseY > 425 && mouseY < 525) {
+      gameState = playing;
+      AI = true;
+  }
   }
   if (gameState == paused){
     gameState = playing;

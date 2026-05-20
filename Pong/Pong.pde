@@ -11,9 +11,10 @@ int lscore,rscore,timer;
 
 float rx,ry,rd,lx,ly,ld;
 float bx,by,bd;
-float vx,vy,px,py;
+float vx,vy;
 
 boolean w,s,up,down = false;
+boolean AI = false;
 
 void setup(){
   size(800,600);
@@ -33,10 +34,11 @@ void setup(){
   by = height/2;
   bd = 100;
   
-  vx = 5;
-  vy = 5;
-  px = bx*2;
-  py = by*2;
+  vx = 8;
+  vy = 8;
+  
+  rscore = lscore = 0;
+  timer = 100;
   
   pauseSound = new SoundFile(this, "TheWorld.mp3");
 }
@@ -44,35 +46,23 @@ void setup(){
 void draw(){
   background(180);
    
-   if (gameState == playing) {
-      gameBackground();
-      game();
-      gameOver();
-    
+  if (gameState == playing) {
+     gameBackground();
+     game();
+     gameOver();
+     drawPauseButton();
   }
   
   if (gameState == menu) {
       drawMenu();
-      return;
   }
 
   if (gameState == gameOver) {
-    drawGameOver();
-    return;
+      gameOver();
   }
 
   if (gameState == paused) {
     drawPauseScreen();
-    return;
+    
   }
-  
-  if (gameState == options){
-   //imageOptions(); 
-   //return;
-  }
-  
-  gameBackground();
-  game();
-  gameOver();
-  drawPauseButton();
 }

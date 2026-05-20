@@ -1,12 +1,16 @@
 void gameOver(){
   fill(0,255,0);
+  textSize(100);
   if (lscore > 2 || rscore > 2){
   if ( lscore > rscore ){
-    text("LEFT WIN",width/2-100,100);
+    text("LEFT WIN",width/2-200,height/2);
 }
   if ( rscore > lscore ){
-    text("Right WIN",width/2-100,100);
+    text("RIGHT WIN",width/2-200,height/2);
 }
+  textSize(30);
+  fill(100);
+  text("Click to return", width/2 - 80, height/2 + 40);
   gameState = gameOver;
   }
 }
