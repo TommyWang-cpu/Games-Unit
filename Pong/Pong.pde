@@ -38,7 +38,6 @@ void setup(){
   vy = 8;
   
   rscore = lscore = 0;
-  timer = 100;
   
   pauseSound = new SoundFile(this, "TheWorld.mp3");
 }

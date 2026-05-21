@@ -18,8 +18,8 @@ void game(){
     if(down == true) ry += 8;
  } else {
     if( bx > 400){
-      if(by > ry) ry += 8;
-      if(by < ry) ry -= 8;
+      if(by > ry) ry += 4;
+      if(by < ry) ry -= 4;
     }
  }
    

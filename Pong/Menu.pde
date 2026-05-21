@@ -1,7 +1,7 @@
 void drawMenu() {
-  background(#1571CB);
+  background(#EDB856);
 
-  fill(#1BC0F0);
+  fill(#FA7217);
   textSize(200);
   text("Pong", width/5,300);
   
