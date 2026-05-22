@@ -1,10 +1,20 @@
+import processing.sound.*; 
+SoundFile pauseSound;
 
 int[] x;
 int[] y;
+boolean[] alive;
+
 int n;
 int bcd;
-int timer;
+int live;
 int tempx, tempy;
+
+int gameState; 
+int menu = 0;
+int playing = 1;
+int gameOver = 2;
+int paused = 3;
 
 float px,py,pd;
 float bx,by,bd;
@@ -18,8 +28,9 @@ boolean collide = false;
 void setup(){
   size(800,800);
   background(180);
+  gameState = menu;
   
-  timer = 200;
+  live = 3;
   
   px = width/2;
   py = height;
@@ -35,6 +46,7 @@ void setup(){
   n = 28;
   x = new int[n];
   y = new int[n];
+  alive = new boolean[n];
   
   tempx = 100;
   tempy = 100;
@@ -42,6 +54,7 @@ void setup(){
   while (i < n){
    x[i] = tempx;
    y[i] = tempy;
+   alive[i] = true;
    tempx += 100;
    if (tempx == width){
     tempx = 100;
@@ -51,9 +64,27 @@ void setup(){
   }
   
   bcd = 50;
+  
+  pauseSound = new SoundFile(this, "TheWorld.mp3");
 }
 
 void draw(){
   background(180);
-  play();
+  
+  if(gameState == menu){
+    drawMenu();
+  }
+  
+  if (gameState == playing) {
+    play();
+    drawPauseButton();
+    gameOver();
+  }
+  if (gameState == gameOver) {
+    gameOver();
+  }
+  
+  if (gameState == paused) {
+    drawPauseScreen();
+  }
 }

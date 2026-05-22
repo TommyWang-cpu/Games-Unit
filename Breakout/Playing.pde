@@ -1,23 +1,20 @@
 void play(){
+  background(#3E619D);
+  fill(255);
   circle(px,py,pd);
   
   circle(bx,by,bd);
   
-  if (a == true) px -= 3;
-  if (d == true) px += 3;
+  if (a == true) px -= 5;
+  if (d == true) px += 5;
   
-  int i =0;
+  int i = 0;
   while (i < n){
-    circle(x[i],y[i],bcd);
-    if(dist(bx,by,x[i],y[i]) < bd/2+bcd/2){
-   vx = (bx - x[i])/10;
-   vy = (by - y[i])/10;
-  }
+    if (alive[i] == true){
+       brick(i);
+    }
     i = i+1;
-  }
-  
-   
-  
+  }  
   
   if (collide == false){
     by += 1;
@@ -29,7 +26,7 @@ void play(){
   if(bx < bd/2 || bx > width-bd/2){
    vx = vx*-1;
   }
-  if(by <= bd/2 || by > height-bd/2){
+  if(by <= bd/2 ){
    vy = vy*-1;
   }
   
@@ -37,5 +34,28 @@ void play(){
    vx = (bx - px)/10;
    vy = (by - py)/10;
    collide = true;
+  }
+  reset();
+}
+
+void brick(int i){
+    if (y[i] == 100) fill(#059DFF);
+    if (y[i] == 200) fill(#FF058F);
+    if (y[i] == 300) fill(#FFCE05);
+    if (y[i] == 400) fill(#AFFF05);
+    circle(x[i],y[i],bcd);
+    if(dist(bx,by,x[i],y[i]) < bd/2+bcd/2){
+     vx = (bx - x[i])/10;
+     vy = (by - y[i])/10; 
+     alive[i] = false;
+    }
+}
+
+void reset(){
+  if(by > height+bd/2){
+    bx = width/2;
+    by = height-200;
+    collide = false;
+    live --;
   }
 }
