@@ -7,5 +7,5 @@ void drawMenu() {
   
   fill(#FC26C7);
   textSize(80);
-  text("Play to play",width/4,height-200);
+  text("Click to play",width/4,height-200);
 }

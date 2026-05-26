@@ -1,6 +1,10 @@
 import processing.sound.*; 
 SoundFile pauseSound;
 
+PImage[] gif;
+int numberOfFrames;
+int f;
+
 int[] x;
 int[] y;
 boolean[] alive;
@@ -26,8 +30,17 @@ boolean collide = false;
 
 
 void setup(){
-  size(800,800);
+  size(800,800,P2D);
   background(180);
+  
+  numberOfFrames = 10;
+  gif = new PImage[numberOfFrames];
+  int i = 0;
+  while(i < numberOfFrames){
+    gif[i] = loadImage("frame_0"+i+"_delay-0.04s.gif");
+    i=i+1;
+  }
+  
   gameState = menu;
   
   live = 3;
@@ -50,7 +63,7 @@ void setup(){
   
   tempx = 100;
   tempy = 100;
-  int i = 0;
+  //int i = 0;
   while (i < n){
    x[i] = tempx;
    y[i] = tempy;
@@ -73,6 +86,7 @@ void draw(){
   
   if(gameState == menu){
     drawMenu();
+    Gif();
   }
   
   if (gameState == playing) {
