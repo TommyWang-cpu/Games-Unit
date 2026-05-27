@@ -36,6 +36,16 @@ void play(){
    collide = true;
   }
   reset();
+  
+  //Score
+   textSize(30); 
+   fill(180);
+   text("Score:",100,700);
+   text(score,180,700);
+   
+  //Live
+   text("Live:",600,700);
+   text(live,680,700);
 }
 
 void brick(int i){
@@ -48,7 +58,10 @@ void brick(int i){
      vx = (bx - x[i])/10;
      vy = (by - y[i])/10; 
      alive[i] = false;
+     score ++;
+     println(i);
     }
+    
 }
 
 void reset(){

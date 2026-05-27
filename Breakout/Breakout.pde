@@ -13,6 +13,7 @@ int n;
 int bcd;
 int live;
 int tempx, tempy;
+int score = 0;
 
 int gameState; 
 int menu = 0;
@@ -26,6 +27,7 @@ float vx,vy;
 
 boolean a,d;
 boolean collide = false;
+boolean loss = false;
 
 
 
@@ -33,12 +35,12 @@ void setup(){
   size(800,800,P2D);
   background(180);
   
-  numberOfFrames = 10;
+  numberOfFrames = 71;
   gif = new PImage[numberOfFrames];
-  int i = 0;
-  while(i < numberOfFrames){
-    gif[i] = loadImage("frame_0"+i+"_delay-0.04s.gif");
-    i=i+1;
+  int g = 0;
+  while(g < numberOfFrames){
+    gif[g] = loadImage("frame_"+g+"_delay-0.04s.gif");
+    g=g+1;
   }
   
   gameState = menu;
@@ -63,7 +65,7 @@ void setup(){
   
   tempx = 100;
   tempy = 100;
-  //int i = 0;
+  int i = 0;
   while (i < n){
    x[i] = tempx;
    y[i] = tempy;
@@ -85,8 +87,9 @@ void draw(){
   background(180);
   
   if(gameState == menu){
-    drawMenu();
     Gif();
+    drawMenu();
+    //Gif();
   }
   
   if (gameState == playing) {
@@ -95,7 +98,7 @@ void draw(){
     gameOver();
   }
   if (gameState == gameOver) {
-    gameOver();
+    drawGameOver();
   }
   
   if (gameState == paused) {

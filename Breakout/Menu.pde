@@ -1,5 +1,5 @@
 void drawMenu() {
-  background(#EDB856);
+  //background(#EDB856);
 
   fill(#FA7217);
   textSize(200);
