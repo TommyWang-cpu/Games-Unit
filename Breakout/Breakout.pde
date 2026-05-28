@@ -58,25 +58,8 @@ void setup(){
   vx = 8;
   vy = 8;
   
-  n = 28;
-  x = new int[n];
-  y = new int[n];
-  alive = new boolean[n];
   
-  tempx = 100;
-  tempy = 100;
-  int i = 0;
-  while (i < n){
-   x[i] = tempx;
-   y[i] = tempy;
-   alive[i] = true;
-   tempx += 100;
-   if (tempx == width){
-    tempx = 100;
-    tempy += 100;
-   }
-   i = i+1;
-  }
+  Reset();
   
   bcd = 50;
   
@@ -89,7 +72,6 @@ void draw(){
   if(gameState == menu){
     Gif();
     drawMenu();
-    //Gif();
   }
   
   if (gameState == playing) {

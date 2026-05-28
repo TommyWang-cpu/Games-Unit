@@ -25,10 +25,40 @@ void drawGameOver(){
   textSize(30);
   fill(100);
   text("Click to return", width/2 - 80, height/2 + 40);
-  }
+  }  
 }
 
 void Reset(){
   live = 3;
   score = 0;
+  
+  px = width/2;
+  py = height;
+  
+  bx = width/2;
+  by = height - 200;
+  
+  collide = false;
+  
+  n = 28;
+  x = new int[n];
+  y = new int[n];
+  alive = new boolean[n];
+  
+  tempx = 100;
+  tempy = 100;
+  
+  int i = 0;
+  
+  while (i < n){
+   x[i] = tempx;
+   y[i] = tempy;
+   alive[i] = true;
+   tempx += 100;
+   if (tempx == width){
+    tempx = 100;
+    tempy += 100;
+   }
+   i = i+1;
+  }
 }

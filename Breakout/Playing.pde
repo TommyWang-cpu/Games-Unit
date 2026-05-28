@@ -5,8 +5,17 @@ void play(){
   
   circle(bx,by,bd);
   
+  if (px > 0+pd/2){
   if (a == true) px -= 5;
+  }
+  if (px < width-pd/2){
   if (d == true) px += 5;
+  }
+  
+  if (px < 0+pd/2){
+    a = false;
+  }
+  
   
   int i = 0;
   while (i < n){
@@ -60,6 +69,7 @@ void brick(int i){
      alive[i] = false;
      score ++;
      println(i);
+     //score = 28;
     }
     
 }
