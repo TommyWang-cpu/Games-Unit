@@ -10,12 +10,20 @@ void game(){
  fill(255);
  circle(bx,by,bd);
  
+ if (ly > 0+ld/2){
  if(w == true) ly -= 8;
+ }
+ if (ly < height-ld/2){
  if(s == true) ly += 8;
+ }
  
  if (AI == false){
+   if (ry > 0+rd/2){
     if(up == true) ry -= 8;
+   }
+   if (ry < height-rd/2){
     if(down == true) ry += 8;
+   }
  } else {
     if( bx > 400){
       if(by > ry) ry += 4;
@@ -59,11 +67,13 @@ void game(){
   if(bx <= bd/2 || by <= bd/2){
    vy = vy*-1;
   }
-  if(dist(bx,by,rx,ry) < rd/2+bd/2){
-   vx = vx*-1;
-  }
   if(dist(bx,by,lx,ly) < ld/2+bd/2){
-   vx = vx*-1;
+   vx = (bx - lx)/10;
+   vy = (by - ly)/10;
+  }
+  if(dist(bx,by,rx,ry) < rd/2+bd/2){
+   vx = (bx - rx)/10;
+   vy = (by - ry)/10;
   }
  
 }
