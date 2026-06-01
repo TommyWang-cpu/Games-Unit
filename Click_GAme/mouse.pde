@@ -16,10 +16,6 @@ void mousePressed() {
        gameState = options;
     }
 
-    if (mouseX > width/2 - 75 && mouseX < width/2 + 75 &&
-        mouseY > 360 && mouseY < 410) {
-      exit();
-    }
   }
   
   if (gameState == options){
@@ -68,7 +64,7 @@ void mousePressed() {
 
 void mouseDragged() {
 
-  if (gameState != options);
+  if (gameState == options);
 
   if (mouseX >= sizeSliderX && mouseX <= sizeSliderX + 120 &&
       mouseY >= sizeSliderY - 5 && mouseY <= sizeSliderY + 15) {

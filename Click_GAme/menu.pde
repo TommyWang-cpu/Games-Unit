@@ -12,21 +12,20 @@ void drawMenu() {
 }
 
 void buttons(){
+  tactile(width/2,280,50);
   fill(100, 200, 100);
   rect(width/2 - 75, 240, 150, 50);
   fill(0);
   textSize(18);
   text("START", width/2, 265);
-
+   
+  tactile(width/2,350,40);
   fill(100, 150, 255);
   rect(width/2 - 75, 300, 150, 50);
   fill(0);
   text("OPTIONS", width/2, 325);
 
-  fill(200, 100, 100);
-  rect(width/2 - 75, 360, 150, 50);
-  fill(0);
-  text("EXIT", width/2, 385); 
+ 
 }
 
 void imageOptions(){
@@ -34,16 +33,19 @@ void imageOptions(){
   
   textSize(18);
   
+  tactile(width/2,350,30);
   fill(100, 150, 255);
   rect(width/2 - 75, 300, 150, 50);
   fill(0);
   text("CHANGE IMAGE", width/2, 325);
   
+  tactile(width/2,400,30);
   fill(200, 100, 100);
   rect(width/2 - 75, 360, 150, 50);
   fill(0);
   text("EXIT", width/2, 385);
   
+  tactile(999999,99999,99999);
   imageMode(CENTER);
   image(images[currentImage], width/2, 150, sizeValue, sizeValue);
   
@@ -61,4 +63,12 @@ void drawSlider(float xPos, float yPos, float value, float minV, float maxV, Str
 
   fill(c);
   rect(xPos, yPos, map(value, minV, maxV, 0, 120), 10);
+}
+
+void tactile(int x, int y, int r){
+ if(dist(x,y,mouseX,mouseY) < r){
+   stroke(#FC262A);
+  } else {
+   stroke(0); 
+  } 
 }

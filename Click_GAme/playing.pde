@@ -17,11 +17,11 @@ void moveObject() {
   x += vx;
   y += vy;
 
-  if (x < sizeValue/2 || x > width - sizeValue/2) {
+  if (x < 0+sizeValue/2 || x > width - sizeValue/2) {
     vx *= -1;
   }
 
-  if (y < sizeValue/2 || y > height - sizeValue/2) {
+  if (y < 0+sizeValue/2 || y > height - sizeValue/2) {
     vy *= -1;
   }
 }
