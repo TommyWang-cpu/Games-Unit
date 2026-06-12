@@ -1,20 +1,58 @@
-
 void game(){
-  base();
   player1.P1();
   player2.P2();
 
   player1.drawTank(mouseX, mouseY);
   player2.drawTank(player1.x, player1.y);
   
+  base1.display();
+  base2.display();
+
+  for (Wall w : walls) {
+    w.display();
+  }
+  
   gameOver();
 }
+////////////////////////////////////////
+class Base {
 
-void base(){
-  hpBar(100, 150, 150, 30);
-  rect(100,300,150,200);
+  float x, y;
+  float size;
+
+  float hp = 500;
+  float maxHP = 500;
+
+  color c;
+
+  Base(float x, float y, color c) {
+
+    this.x = x;
+    this.y = y;
+    this.c = c;
+
+    size = 80;
+  }
+
+  void display() {
+
+    fill(c);
+    rectMode(CENTER);
+    rect(x, y, size, size);
+
+    // HP Bar
+    fill(50);
+    rect(x-40, y-60, 80, 8);
+
+    fill(0, 255, 0);
+    rect(x-40, y-60, 80*(hp/maxHP), 8);
+  }
+
+  void damage(float amount) {
+    hp = max(0, hp - amount);
+  }
 }
-
+////////////////////////////////////////////
 class Tank {
 
   float x, y;
@@ -32,37 +70,59 @@ class Tank {
     this.x = x;
     this.y = y;
     tankColor = c;
+    }
+  
+    void move(float dx, float dy) {
+
+    float X = x + dx;
+    float Y = y + dy;
+
+    boolean blocked = false;
+
+    for (Wall w : walls) {
+
+      if (w.collides(X, Y, size)) {
+        blocked = true;
+      }
+    }
+
+    if (blocked == false) {
+      x = X;
+      y = Y;
+    }
   }
+
 
   void P1() {
 
       if (w == true) {
-        y -= speed; 
+        move(0, -speed);  
       }
       if (s == true){
-        y += speed;
+        move(0, speed);
       }
       if (a == true){
-        x -= speed;
+        move(-speed, 0);
       }
       if (d == true){
-        x += speed;
+        move(speed, 0);
       }
+      
   }
 
   void P2() {
     
       if (up == true){
-        y -= speed;
+        move(0, -speed);
       }
       if (down == true){
-        y += speed;
+        move(0, speed);
       }
       if (left == true){
-        x -= speed;
+        move(-speed, 0);
       }
       if (right == true){
-        x += speed;
+        move(speed, 0);
       }
     
   }
@@ -114,47 +174,20 @@ class Tank {
   
   void damage(float amount) {
 
-  hp -= amount;
+    hp -= amount;
 
-  if (hp < 0) {
-    hp = 0;
+    if (hp < 0) {
+      hp = 0;
+      destroyed();
+    }
   }
- }
-}
-
-void hpBar(float x, float y, float w, float h) {
-
-  
-  fill(50);
-  rect(x, y, w, h);
-
-  fill(255);
-  rect(x, y, w * (damageBarHP / maxHP), h);
-
-  fill(0, 200, 0);
-  rect(x, y, w * (hp / maxHP), h);
-
-  noFill();
-  stroke(255);
-  strokeWeight(2);
-  rect(x, y, w, h);
-  noStroke();
-
-  fill(255);
-  textAlign(CENTER, CENTER);
-  //text(int(hp) + " / " + int(maxHP), x + w/2, y + h/2);
-
-  if (damageTimer > 0) {
-    damageTimer--;
-  } 
-  else if (damageBarHP > hp) {
-    damageBarHP -= 5;
-    if (damageBarHP < hp) {
-      damageBarHP = hp;
+  void destroyed(){
+    if (hp == 0){
+      speed = 0;
     }
   }
 }
-
+////////////////////////////////////////////
 class Shell {
 
   float x, y;
@@ -198,5 +231,63 @@ class Shell {
     }
 
     return dist(x, y, t.x, t.y) < t.size/2;
+  }
+}
+/////////////////////////////////////////
+class Wall {
+
+  float x, y, w, h;
+
+  Wall(float x, float y, float w, float h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+  }
+
+  void display() {
+    fill(100);
+    rect(x, y, w, h);
+  }
+
+  boolean collides(float tx, float ty, float size) {
+
+    return tx + size/2 > x &&
+           tx - size/2 < x+w &&
+           ty + size/2 > y &&
+           ty - size/2 < y+h;
+  }
+}
+
+void hpBar(float x, float y, float w, float h) {
+
+  
+  fill(50);
+  rect(x, y, w, h);
+
+  fill(255);
+  rect(x, y, w * (damageBarHP / maxHP), h);
+
+  fill(0, 200, 0);
+  rect(x, y, w * (hp / maxHP), h); 
+
+  noFill();
+  stroke(255);
+  strokeWeight(2);
+  rect(x, y, w, h);
+  noStroke();
+
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(int(hp) + " / " + int(maxHP), x + w/2, y + h/2);
+
+  if (damageTimer > 0) {
+    damageTimer--;
+  } 
+  else if (damageBarHP > hp) {
+    damageBarHP -= 5;
+    if (damageBarHP < hp) {
+      damageBarHP = hp;
+    }
   }
 }

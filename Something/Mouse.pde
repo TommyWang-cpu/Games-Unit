@@ -1,4 +1,3 @@
-
 void mousePressed(){
   
    player1.shoot(mouseX, mouseY);
